@@ -11,7 +11,7 @@
 FROM ubuntu:16.04
 
 LABEL maintainer="Jon D. (dArkjON), David B. (dalijolijo)"
-LABEL version="0.2"
+LABEL version="0.15.2.0.0"
 
 # Make ports available to the world outside this container
 # DefaultPort = 8555

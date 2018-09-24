@@ -55,7 +55,7 @@ sudo curl -sSL https://get.docker.com | sh
 Login as root, then do:
 
 ```
-wget https://raw.githubusercontent.com/LIMXTEC/Bitcore-BTX-RPC-Installer/master/btx-docker.sh -O - | bash
+sudo bash -c "$(curl -fsSL https://github.com/limxtec/Bitcore-BTX-RPC-Installer/raw/master/btx-docker.sh)"
 ```
 
 ### For more details to docker related stuff have a look at:
