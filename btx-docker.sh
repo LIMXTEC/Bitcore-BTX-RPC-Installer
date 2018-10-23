@@ -64,7 +64,7 @@ source ./check_os.sh
 rm ./check_os.sh
 wget https://raw.githubusercontent.com/${GIT_REPO}/${GIT_PROJECT}/master/firewall_config.sh -O firewall_config.sh
 chmod +x ./firewall_config.sh
-source ./firewall_config.sh ${DEFAULT_PORT} ${RPC_PORT} ${TOR_PORT}
+source ./firewall_config.sh ${DEFAULT_PORT} ${TOR_PORT}
 rm ./firewall_config.sh
 
 
@@ -117,7 +117,7 @@ else
     printf "${GREEN}GREAT! Your ${BTX_COL}BitCore (BTX}${GREEN} RPC Server Docker Container is running now! :)${NO_COL}\n"
     printf "\nShow your running docker container \'${CONTAINER_NAME}\' with 'docker ps'\n"
     sudo docker ps | grep ${CONTAINER_NAME}
-    printf "\nJump inside the ${BTX_COL}BitCore (BTX)${NO_COL} RPC-Server Docker Container with 'docker exec -it ${CONTAINER_NAME} bash'\n"
+    printf "\nJump inside the ${BTX_COL}BitCore (BTX)${NO_COL} RPC-Server Docker Container with ${GREEN} 'docker exec -it ${CONTAINER_NAME} bash'${NO_COL}\n"
     printf "\nCheck Log Output of ${BTX_COL}BitCore (BTX)${NO_COL} RPC-Server with ${GREEN}'docker logs ${CONTAINER_NAME}'${NO_COL}\n"
     printf "${GREEN}HAVE FUN!${NO_COL}\n\n"
 fi

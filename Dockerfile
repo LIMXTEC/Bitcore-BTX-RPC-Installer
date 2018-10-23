@@ -72,23 +72,35 @@ RUN echo '*** Running updates and installing required packages ***' && \
 #
 # Cloning and Compiling BitCore Wallet
 #
-RUN echo '*** Cloning and Compiling BitCore Wallet ***' && \
-    cd && \
-    echo "Execute a git clone of LIMXTEC/BitCore. Please wait..." && \
-    git clone https://github.com/LIMXTEC/BitCore.git && \
-    cd BitCore && \
-    ./autogen.sh && \
-    ./configure --disable-dependency-tracking --enable-tests=no --without-gui --disable-hardening && \
-    make && \
-    cd && \
-    cd BitCore/src && \
-    strip bitcored && \
-    cp bitcored /usr/local/bin && \
-    strip bitcore-cli && \
-    cp bitcore-cli /usr/local/bin && \
-    chmod 775 /usr/local/bin/bitcore* && \
-    cd && \
-    rm -rf BitCore
+#RUN echo '*** Cloning and Compiling BitCore Wallet ***' && \
+#    cd && \
+#    echo "Execute a git clone of LIMXTEC/BitCore. Please wait..." && \
+#    git clone https://github.com/LIMXTEC/BitCore.git && \
+#    cd BitCore && \
+#    ./autogen.sh && \
+#    ./configure --disable-dependency-tracking --enable-tests=no --without-gui --disable-hardening && \
+#    make && \
+#    cd && \
+#    cd BitCore/src && \
+#    strip bitcored && \
+#    cp bitcored /usr/local/bin && \
+#    strip bitcore-cli && \
+#    cp bitcore-cli /usr/local/bin && \
+#    chmod 775 /usr/local/bin/bitcore* && \
+#    cd && \
+#    rm -rf BitCore
+
+#
+# Download BitCore release
+#
+RUN echo '*** Download BitCore release ***' && \
+    mkdir -p /root/src && \
+    cd /root/src && \
+    wget https://github.com/LIMXTEC/BitCore/releases/download/0.15.2.0.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz && \
+    tar xzf *.tar.gz && \
+    chmod 775 bitcore* && \
+    cp bitcore* /usr/local/bin && \
+    rm *.tar.gz
 
 #
 # Configure bitcore.conf	
