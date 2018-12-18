@@ -99,7 +99,7 @@ echo '*** Step 10/10 - Wait for wallet synchronization!***'
 echo 'To make sure everything working properly you need to reboot server, i advice to wait until wallet synchronization ends.'
 echo 'Easiest way to do it, is to catch new block message, where "height=***" is equal to "Current numbers of blocks" in local wallet (help>debug>information)'
 sleep 5
-echo 'Now go, and visit our telegram channel at t.me/bitcore_btx_official tell us how its going!'
+echo 'Now go, and visit our telegram channel at t.me/bitcore_cc tell us how its going!'
 echo ' '
 read -p "Press enter to monitor debug.log"
 tail -f debug.log
