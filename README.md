@@ -72,6 +72,6 @@ Your config file is located in `cd /home/bitcore/.bitcore/bitcore.conf`
 After changing rpcuser & rpcpassword please restart the bitcore server.
 
 
-## **Visit us at [Telegram](https://t.me/bitcore_btx_official) // Special Thanks to : [wfthkttn](https://github.com/wfthkttn)**
+## **Visit us at [Telegram](https://t.me/bitcore_bcc) // Special Thanks to : [wfthkttn](https://github.com/wfthkttn)**
 
 Fork Source : https://github.com/dArkjON/BSD-Masternode-Setup-1604
