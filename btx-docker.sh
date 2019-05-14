@@ -28,7 +28,7 @@ BTX_COL='\033[1;35m'
 #
 clear
 REUSE="No"
-printf "\nDOCKER SETUP FOR ${BTX_COL}BITCORE (BTX) v.{IMAGE_TAG}${NO_COL} RPC SERVER\n"
+printf "\nDOCKER SETUP FOR ${BTX_COL}BITCORE (BTX) v.${IMAGE_TAG}${NO_COL} RPC SERVER\n"
 printf "\nSetup Config file"
 printf "\n-----------------\n"
 if [ -f "$CONFIG" ]
