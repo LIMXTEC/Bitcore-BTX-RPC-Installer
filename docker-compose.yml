@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  bitcore_rpc:
+    build:
+      context: ./docker-bitcored
+      dockerfile: ./Dockerfile
+    image: bitcored-rpc
+    container_name: bitcore_rpc
+    command:
+      -externalip=${EXTERNAL_IP}
+      -whitebind=172.21.0.11:8555
+      -rpcbind=172.21.0.11
+      -maxconnections=64
+      -rpcuser=${RPC_USER}
+      -rpcpassword=${RPC_PWD}
+    restart: always
+    networks:
+      bitcore-net:
+        ipv4_address: 172.21.0.11
+    ports:
+      - 8555:8555
+      - 8556:8556
+    expose:
+      - 8555
+      - 8556
+    volumes:
+      - /home/bitcore_rpc:/data
+
+networks:
+  bitcore-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/24

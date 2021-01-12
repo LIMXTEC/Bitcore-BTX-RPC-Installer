@@ -1,77 +1,72 @@
-# Bitcore-BTX-RPC-Installer
-## OPTION 1: Installation with script 
-This script will install all required stuff to run a BitCore RPC Server.
+# bitcore-mn
+Docker Compose to running BitCore RPC node
 
-Just 2 simple Steps and your Server is done!
-
-***Only working for Linux Ubuntu 16.04 LTS***
-
-### Download and start the script
-Login as root, then do:
-
-```
-wget https://raw.githubusercontent.com/dArkjON/Bitcore-BTX-RPC-Installer/master/btxsetup.sh
-chmod +x btxsetup.sh
-./btxsetup.sh
+## Allocating 2GB Swapfile
+```sh
+free -m
+dd if=/dev/zero of=/swapfile bs=1M count=2048
+mkswap /swapfile
+swapon /swapfile
+chmod 600 /swapfile
+free -m
 ```
 
-To enable firewall, you have to manually reboot server when blockchain is fully loaded!
+## VPS Setup
 
-Its loaded when "height" in message:
+1. Connect to your VPS via SSH 
 
-```2018-03-24 21:58:33 UpdateTip: new best=0e18856d9315caa4e58045ec1581686de9076b916f2c791920aefad29fde6bd9 height=156975 version=0x20000000 log2_work=61.420326 tx=751075 date='2018-03-24 21:55:04' progress=0.877860 cache=10.7MiB(5039tx)```
+2. Clone the GitHub
 
-Will be equal to "Current numbers of blocks" in local wallet (GUI - Help > Debug > Information).
+    ```sh
+    git clone https://github.com/LIMXTEC/Bitcore-BTX-RPC-Installer.git
+    ```
 
-### Switch User in Terminal
-After install you can use `su bitcore` to switch the user and with `bitcore-cli getinfo` you will get all info.
+3. Create/Update Masternode information in .env (see example file env)
 
+    ```sh
+    EXTERNAL_IP=46.38.243.55
+    RPC_USER=btx_user
+    RPC_PWD=btx_pwd
+    ```
 
-## OPTION 2: Deploy as a docker container
+4. Start your masternode and wait until blockchain is syncronized
 
-Support for the following distribution versions:
-* CentOS 7.4 (x86_64-centos-7)
-* Fedora 26 (x86_64-fedora-26)
-* Fedora 27 (x86_64-fedora-27) - tested
-* Fedora 28 (x86_64-fedora-28) - tested
-* Debian 7 (x86_64-debian-wheezy)
-* Debian 8 (x86_64-debian-jessie) - tested
-* Debian 9 (x86_64-debian-stretch) - tested
-* Debian 10 (x86_64-debian-buster) - tested
-* Ubuntu 14.04 LTS (x86_64-ubuntu-trusty) - tested
-* Ubuntu 16.04 LTS (x86_64-ubuntu-xenial) - tested
-* Ubuntu 17.10 (x86_64-ubuntu-artful)
-* Ubuntu 18.04 LTS (x86_64-ubuntu-bionic) - tested
+    ```sh
+    docker-compose up -d
+    ```
 
-### Download and execute the docker-ce installation script
+5. Check if blockchain is synchronised and masternode ready to be activated
 
-Download and execute the automated docker-ce installation script - maintained by the Docker project.
+    ```sh
+    docker exec -it bitcore_rpc bash
+    DOCKER> bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx_user -rpcpassword=btx_pwd -rpcport=8556 mnsync status
+    {
+      "AssetID": 1,
+      "AssetName": "MASTERNODE_SYNC_WAITING",
+      "AssetStartTime": 1586727148,
+      "Attempt": 0,
+      "IsBlockchainSynced": false,
+      "IsMasternodeListSynced": false,
+      "IsWinnersListSynced": false,
+      "IsSynced": false,
+      "IsFailed": false
+    }
 
-```
-sudo curl -sSL https://get.docker.com | sh
-```
+    #WAITING...
+    
+    DOCKER> bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx_user -rpcpassword=btx_pwd -rpcport=8556 mnsync status
+    {
+      "AssetID": 999,
+      "AssetName": "MASTERNODE_SYNC_FINISHED",
+      "AssetStartTime": 1587319491,
+      "Attempt": 0,
+      "IsBlockchainSynced": true,
+      "IsMasternodeListSynced": true,
+      "IsWinnersListSynced": true,
+      "IsSynced": true,
+      "IsFailed": false
+    }
+    ```
 
-### Download and execute the script
-Login as root, then do:
+    PLEASE NOTE: It's very important to wait until IsSynced value is true!
 
-```
-sudo bash -c "$(curl -fsSL https://github.com/limxtec/Bitcore-BTX-RPC-Installer/raw/master/btx-docker.sh)"
-```
-
-### For more details to docker related stuff have a look at:
-* Bitcore-BTX-RPC-Installer/BUILD_README.md
-* Bitcore-BTX-RPC-Installer/RUN_README.md
-
-
-## Useful Stuff
-
-To generate a Account-Wallet just use : `bitcore getnewaddress <accoutname>`
-
-Your config file is located in `cd /home/bitcore/.bitcore/bitcore.conf`
-
-After changing rpcuser & rpcpassword please restart the bitcore server.
-
-
-## **Visit us at [Telegram](https://t.me/bitcore_bcc) // Special Thanks to : [wfthkttn](https://github.com/wfthkttn)**
-
-Fork Source : https://github.com/dArkjON/BSD-Masternode-Setup-1604

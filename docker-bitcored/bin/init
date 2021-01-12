@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#
+# Configure bitcore.conf
+#
+CONF=${DATA}/bitcore.conf
+
+if [ ! -e "${CONF}" ]; then
+  echo "listen=1
+server=1
+masternode=0
+
+whitelist=172.21.0.0/24
+rpcallowip=172.21.0.0/24
+port=8555
+rpcport=8556
+rpcclienttimeout=0
+
+addnode=178.237.239.20
+addnode=180.183.125.219
+addnode=185.194.140.60
+addnode=185.194.142.122
+addnode=185.223.29.186
+addnode=185.50.24.19
+addnode=188.68.39.1
+addnode=209.250.229.163
+addnode=212.237.211.92
+addnode=37.120.186.85
+addnode=80.211.241.182
+addnode=89.230.76.83
+addnode=90.64.143.249
+addnode=93.190.22.30
+
+logtimestamps=1
+printtoconsole=1" > "${CONF}"
+fi
+
+exec bitcored -datadir=${DATA} -conf=${CONF} "$@"
