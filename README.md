@@ -24,9 +24,9 @@ free -m
 3. Create/Update Masternode information in .env (see example file env)
 
     ```sh
-    EXTERNAL_IP=46.38.243.55
-    RPC_USER=btx_user
-    RPC_PWD=btx_pwd
+    EXTERNAL_IP=<IP>
+    RPC_USER=<btx_user>
+    RPC_PWD=<btx_pwd>
     ```
 
 4. Start your masternode and wait until blockchain is syncronized
