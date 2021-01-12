@@ -38,8 +38,7 @@ free -m
 5. Check if blockchain is synchronised and masternode ready to be activated
 
     ```sh
-    docker exec -it bitcore_rpc bash
-    DOCKER> bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx_user -rpcpassword=btx_pwd -rpcport=8556 mnsync status
+    docker exec -it bitcore_rpc bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx_user -rpcpassword=btx_pwd -rpcport=8556 mnsync status
     {
       "AssetID": 1,
       "AssetName": "MASTERNODE_SYNC_WAITING",
@@ -54,7 +53,7 @@ free -m
 
     #WAITING...
     
-    DOCKER> bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx_user -rpcpassword=btx_pwd -rpcport=8556 mnsync status
+    docker exec -it bitcore_rpc bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx_user -rpcpassword=btx_pwd -rpcport=8556 mnsync status
     {
       "AssetID": 999,
       "AssetName": "MASTERNODE_SYNC_FINISHED",
