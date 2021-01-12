@@ -1,4 +1,4 @@
-# bitcore-mn
+# Bitcore-BTX-RPC-Installer
 Docker Compose to running BitCore RPC node
 
 ## Allocating 2GB Swapfile
